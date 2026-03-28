@@ -1,14 +1,21 @@
 import { useState } from 'react';
 
-export default function TicketForm() {
+export default function TicketForm({ dispatch }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [priority, setPriority] = useState('1');
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    dispatch({
+      type: 'ADD_TICKET',
+      payload: {
+        title,
+        description,
+        priority,
+      },
+    });
     clearForm();
-    // Handle form submission logic here
   };
 
   const clearForm = () => {
