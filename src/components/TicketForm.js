@@ -5,11 +5,20 @@ export default function TicketForm({ dispatch }) {
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState("1");
 
+  const generateTicketId = () => {
+    if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+      return `BUG-${crypto.randomUUID()}`;
+    }
+
+    return `BUG-${Date.now()}-${Math.floor(Math.random() * 1000000)}`;
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch({
       type: "ADD_TICKET",
       payload: {
+        id: generateTicketId(),
         title,
         description,
         priority,

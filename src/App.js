@@ -13,7 +13,9 @@ function App() {
       <div className="container">
         <h1>Bug Blaster</h1>
         <TicketForm dispatch={dispatch} />
-        {tickets.length > 0 && <TicketList tickets={tickets} />}
+        {tickets.length > 0 && (
+          <TicketList tickets={tickets} dispatch={dispatch} />
+        )}
       </div>
     </div>
   );

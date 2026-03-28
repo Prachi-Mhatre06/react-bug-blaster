@@ -1,4 +1,4 @@
-export default function Ticket({ ticket }) {
+export default function Ticket({ ticket, dispatch }) {
   const priorityClass = {
     1: "priority-low",
     2: "priority-medium",
@@ -10,6 +10,12 @@ export default function Ticket({ ticket }) {
 
       <h3>{ticket.title}</h3>
       <p>{ticket.description}</p>
+      <button
+        className="button"
+        onClick={() => dispatch({ type: "DELETE_TICKET", payload: ticket.id })}
+      >
+        Delete
+      </button>
     </div>
   );
 }
