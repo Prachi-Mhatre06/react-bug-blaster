@@ -1,9 +1,9 @@
-import './App.css';
-import './styles.css';
-import TicketForm from './components/TicketForm';
-import { useReducer } from 'react';
-import ticketReducer from './reducers/ticketReducer'; 
-import TicketList from './components/TicketList';
+import "./App.css";
+import "./styles.css";
+import TicketForm from "./components/TicketForm";
+import { useReducer } from "react";
+import ticketReducer from "./reducers/ticketReducer";
+import TicketList from "./components/TicketList";
 
 function App() {
   const [tickets, dispatch] = useReducer(ticketReducer, []);
@@ -13,9 +13,7 @@ function App() {
       <div className="container">
         <h1>Bug Blaster</h1>
         <TicketForm dispatch={dispatch} />
-        {tickets.length > 0 && (
-          <TicketList tickets={tickets} />
-        )}
+        {tickets.length > 0 && <TicketList tickets={tickets} />}
       </div>
     </div>
   );

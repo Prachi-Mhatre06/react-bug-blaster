@@ -1,14 +1,14 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function TicketForm({ dispatch }) {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [priority, setPriority] = useState('1');
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [priority, setPriority] = useState("1");
 
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch({
-      type: 'ADD_TICKET',
+      type: "ADD_TICKET",
       payload: {
         title,
         description,
@@ -19,18 +19,18 @@ export default function TicketForm({ dispatch }) {
   };
 
   const clearForm = () => {
-    setTitle('');
-    setDescription('');
-    setPriority('1');
+    setTitle("");
+    setDescription("");
+    setPriority("1");
   };
 
   const priorityOptions = {
-    '1': 'Low',
-    '2': 'Medium',
-    '3': 'High',
-  }
+    1: "Low",
+    2: "Medium",
+    3: "High",
+  };
 
-  return ( 
+  return (
     <form onSubmit={handleSubmit}>
       <div className="form-group">
         <label htmlFor="bugTitle">Title:</label>
@@ -56,7 +56,7 @@ export default function TicketForm({ dispatch }) {
       </div>
       <div className="form-group">
         <fieldset className="priority-fieldset">
-        <legend>Priority</legend>
+          <legend>Priority</legend>
           {Object.entries(priorityOptions).map(([value, label]) => (
             <label key={value} className="priority-label">
               <input
@@ -77,5 +77,5 @@ export default function TicketForm({ dispatch }) {
         Submit
       </button>
     </form>
-    );
+  );
 }
