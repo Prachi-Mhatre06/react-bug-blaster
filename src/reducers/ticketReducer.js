@@ -18,6 +18,8 @@ export default function ticketReducer(state, action) {
         ),
         editingTicket: null,
       };
+    case "SORT_TICKETS":
+      return { ...state, sortPreference: action.payload };
     default:
       return state;
   }
