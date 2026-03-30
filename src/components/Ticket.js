@@ -16,6 +16,14 @@ export default function Ticket({ ticket, dispatch }) {
       >
         Delete
       </button>
+      <button
+        className="button"
+        onClick={() =>
+          dispatch({ type: "SET_EDITING_TICKET", payload: ticket })
+        }
+      >
+        Edit
+      </button>
     </div>
   );
 }

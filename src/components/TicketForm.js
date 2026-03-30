@@ -1,12 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-export default function TicketForm({ dispatch }) {
+export default function TicketForm({ dispatch, editingTicket }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState("1");
 
+  useEffect(() => {
+    if (editingTicket) {
+      setTitle(editingTicket.title);
+      setDescription(editingTicket.description);
+      setPriority(editingTicket.priority);
+    }
+  }, [editingTicket]);
+
   const generateTicketId = () => {
-    if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+    if (
+      typeof crypto !== "undefined" &&
+      typeof crypto.randomUUID === "function"
+    ) {
       return `BUG-${crypto.randomUUID()}`;
     }
 
@@ -15,15 +26,27 @@ export default function TicketForm({ dispatch }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch({
-      type: "ADD_TICKET",
-      payload: {
-        id: generateTicketId(),
-        title,
-        description,
-        priority,
-      },
-    });
+    if (editingTicket) {
+      dispatch({
+        type: "UPDATE_TICKET",
+        payload: {
+          ...editingTicket,
+          title,
+          description,
+          priority,
+        },
+      });
+    } else {
+      dispatch({
+        type: "ADD_TICKET",
+        payload: {
+          id: generateTicketId(),
+          title,
+          description,
+          priority,
+        },
+      });
+    }
     clearForm();
   };
 
